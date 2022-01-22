@@ -1,0 +1,519 @@
+#!/bin/bash
+#i4n_m00n3
+echo "                                         ______                        ______  "
+echo "                                     _  (_____ \                      (_____ \ "
+echo "  ____ ___  ____ _   _ _____  ____ _| |_  ____) )____  ____ ___  _ _ _  ____) )"
+echo " / ___) _ \|  _ \ | | | ___ |/ ___|_   _)/ ____// _  |/ ___) _ \| | | |/ ____/ "
+echo "( (__| |_| | | | \ V /| ____| |     | |_| (____| |_| ( (__| |_| | | | | (_____ "
+echo " \____)___/|_| |_|\_/ |_____)_|      \__)_______)__  |\____)___/ \___/|_______)"
+echo "                                                   |_|                         "
+echo "                                                                               "
+echo "				 					     	     "
+echo "                                                                               "
+echo ""
+red=`tput setaf 1`
+green=`tput setaf 2`
+blue=`tput setaf 4`
+yellow=`tput setaf 3`
+orange=`tput setaf 5`
+purple=`tput setaf 6`
+blank=`tput setaf 7`
+echo "Introduce nombre de la máquina (sin extensión)"
+read nombre
+for file in $*;
+do
+case $file in
+    *.zip)
+    echo "${purple}Descomprimiendo zip"
+    unzip $file > /dev/null
+    rm *.zip
+	if [ -d $nombre*/ ]; then
+	cd $nombre*/
+		if [ -f *.ova ]; then
+		echo "${yellow}Descomprimiendo ova"
+		tar -xvf *.ova > /dev/null
+			if [ -f *.vmdk ]; then
+			echo "${red}Convirtendo vmdk a qcow2"
+			qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+			echo "${green}Limpiando"
+			rm *.ovf 2>/dev/null
+			rm *.ova 2>/dev/null
+			rm *.vmdk 2>/dev/null
+			rm *.log 2>/dev/null
+			rm *.nvram 2>/dev/null
+			rm *.vmsd 2>/dev/null
+			rm *.vmx 2>/dev/null
+			rm *.vmxf 2>/dev/null
+			rm *.mf 2>/dev/null
+			rm *.zip 2>/dev/null
+			echo "${orange}Terminado"
+			else
+			echo "error"
+			fi
+		else
+		echo "${red}Convirtendo vmdk a qcow2"
+		qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+               	echo "${green}Limpiando"
+		rm *.ovf 2>/dev/null
+		rm *.ova 2>/dev/null
+		rm *.vmdk 2>/dev/null
+		rm *.log 2>/dev/null
+		rm *.nvram 2>/dev/null
+		rm *.vmsd 2>/dev/null
+		rm *.vmx 2>/dev/null
+		rm *.vmxf 2>/dev/null
+		rm *.mf 2>/dev/null
+		rm *.zip 2>/dev/null
+		echo "${orange}Terminado"
+		fi
+	elif [ -f *.ova ]; then
+		echo "${yellow}Descomprimiendo ova"
+		tar -xvf *.ova > /dev/null
+		echo "${red}Convirtendo vmdk a qcow2"
+		qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+		echo "${green}Limpiando"
+		rm *.ovf 2>/dev/null
+		rm *.ova 2>/dev/null
+		rm *.vmdk 2>/dev/null
+		rm *.log 2>/dev/null
+		rm *.nvram 2>/dev/null
+		rm *.vmsd 2>/dev/null
+		rm *.vmx 2>/dev/null
+		rm *.vmxf 2>/dev/null
+		rm *.mf 2>/dev/null
+		rm *.zip 2>/dev/null
+		echo "${orange}Terminado"
+	else
+		echo "${red}Convirtendo vmdk a qcow2"
+                qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+                echo "${green}Limpiando"
+		rm *.ovf 2>/dev/null
+		rm *.ova 2>/dev/null
+		rm *.vmdk 2>/dev/null
+		rm *.log 2>/dev/null
+		rm *.nvram 2>/dev/null
+		rm *.vmsd 2>/dev/null
+		rm *.vmx 2>/dev/null
+		rm *.vmxf 2>/dev/null
+		rm *.mf 2>/dev/null
+		rm *.zip 2>/dev/null
+		echo "${orange}Terminado"
+	fi
+        ;;
+    *.tar)
+    echo "${purple}Descomprimiendo tar"
+    tar -xvf $file > /dev/null
+    rm *.tar
+	if [ -d $nombre*/ ]; then
+	cd $nombre*/
+		if [ -f *.ova ]; then
+		echo "${yellow}Descomprimiendo ova"
+		tar -xvf *.ova > /dev/null
+			if [ -f *.vmdk ]; then
+			echo "${red}Convirtendo vmdk a qcow2"
+			qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+			echo "${green}Limpiando"
+			rm *.ovf 2>/dev/null
+			rm *.ova 2>/dev/null
+			rm *.vmdk 2>/dev/null
+			rm *.log 2>/dev/null
+			rm *.nvram 2>/dev/null
+			rm *.vmsd 2>/dev/null
+			rm *.vmx 2>/dev/null
+			rm *.vmxf 2>/dev/nul
+			rm *.mf 2>/dev/null
+			rm .tar 2>/dev/null
+			echo "${orange}Terminado"
+			else
+			echo "error"
+			fi
+		else
+		echo "${red}Convirtendo vmdk a qcow2"
+		qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+                echo "${green}Limpiando"
+		rm *.ovf 2>/dev/null
+		rm *.ova 2>/dev/null
+		rm *.vmdk 2>/dev/null
+		rm *.log 2>/dev/null
+		rm *.nvram 2>/dev/null
+		rm *.vmsd 2>/dev/null
+		rm *.vmx 2>/dev/null
+		rm *.vmxf 2>/dev/null
+		rm *.mf 2>/dev/null
+		rm *.tar 2>/dev/null
+		echo "${orange}Terminado"
+		fi
+	elif [ -f *.ova ]; then
+		echo "${yellow}Descomprimiendo ova"
+		tar -xvf *.ova > /dev/null
+		echo "${red}Convirtendo vmdk a qcow2"
+		qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+		echo "${green}Limpiando"
+		rm *.ovf 2>/dev/null
+		rm *.ova 2>/dev/null
+		rm *.vmdk 2>/dev/null
+		rm *.log 2>/dev/null
+		rm *.nvram 2>/dev/null
+		rm *.vmsd 2>/dev/null
+		rm *.vmx 2>/dev/null
+		rm *.vmxf 2>/dev/null
+		rm *.mf 2>/dev/null
+		rm *.tar 2>/dev/null
+		echo "${orange}Terminado"
+	else
+		echo "${red}Convirtendo vmdk a qcow2"
+                qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+                echo "${green}Limpiando"
+		rm *.ovf 2>/dev/null
+		rm *.ova 2>/dev/null
+		rm *.vmdk 2>/dev/null
+		rm *.log 2>/dev/null
+		rm *.nvram 2>/dev/null
+		rm *.vmsd 2>/dev/null
+		rm *.vmx 2>/dev/null
+		rm *.vmxf 2>/dev/null
+		rm *.mf 2>/dev/null
+		rm *.tar 2>/dev/null
+		echo "${orange}Terminado"
+
+	fi
+        ;;
+   *.ova)
+   echo "${purple}Descomprimiendo ova"
+   tar -xvf $file > /dev/null
+	if [ -f *.vmdk ]; then
+	echo "${red}Convirtendo vmdk a qcow2"
+	qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+        echo "${green}Limpiando"
+	rm *.ovf 2>/dev/null
+	rm *.ova 2>/dev/null
+	rm *.vmdk 2>/dev/null
+	rm *.log 2>/dev/null
+	rm *.nvram 2>/dev/null
+	rm *.vmsd 2>/dev/null
+	rm *.vmx 2>/dev/null
+	rm *.vmxf 2>/dev/null
+	rm *.mf 2>/dev/null
+	echo "${orange}Terminado"
+	else
+	echo "Error"
+	fi
+        ;;
+   *.7z)
+   echo "${purple}Descomprimiendo 7-Zip"
+   7z x $file > /dev/null
+   rm *.7z
+	if [ -d $nombre*/ ]; then
+	cd $nombre*/
+		if [ -f *.ova ]; then
+		echo "${yellow}Descomprimiendo ova"
+		tar -xvf *.ova
+			if [ -f *.vmdk ]; then
+			echo "${red}Convirtendo vmdk a qcow2"
+			qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+			echo "${green}Limpiando"
+			rm *.ovf 2>/dev/null
+			rm *.ova 2>/dev/null
+			rm *.vmdk 2>/dev/null
+			rm *.log 2>/dev/null
+			rm *.nvram 2>/dev/null
+			rm *.vmsd 2>/dev/null
+			rm *.vmx 2>/dev/null
+			rm *.vmxf 2>/dev/null
+			rm *.mf 2>/dev/null
+			rm *.7z 2>/dev/null
+			echo "${orange}Terminado"
+			else
+			echo "error"
+			fi
+		else
+		echo "${red}Convirtendo vmdk a qcow2"
+		qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+               	echo "${green}Limpiando"
+		rm *.ovf 2>/dev/null
+		rm *.ova 2>/dev/null
+		rm *.vmdk 2>/dev/null
+		rm *.log 2>/dev/null
+		rm *.nvram 2>/dev/null
+		rm *.vmsd 2>/dev/null
+		rm *.vmx 2>/dev/null
+		rm *.vmxf 2>/dev/null
+		rm *.mf 2>/dev/null
+		rm *.7z 2>/dev/null
+		echo "${orange}Terminado"
+		fi
+	elif [ -f *.ova ]; then
+		echo "${yellow}Descomprimiendo ova"
+		tar -xvf *.ova > /dev/null
+		echo "${red}Convirtendo vmdk a qcow2"
+		qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+		echo "${green}Limpiando"
+		rm *.ovf 2>/dev/null
+		rm *.ova 2>/dev/null
+		rm *.vmdk 2>/dev/null
+		rm *.log 2>/dev/null
+		rm *.nvram 2>/dev/null
+		rm *.vmsd 2>/dev/null
+		rm *.vmx 2>/dev/null
+		rm *.vmxf 2>/dev/null
+		rm *.mf 2>/dev/null
+		rm *.7z 2>/dev/null
+		echo "${orange}Terminado"
+	else
+		echo "${red}Convirtendo vmdk a qcow2"
+                qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+                echo "${green}Limpiando"
+		rm *.ovf 2>/dev/null
+		rm *.ova 2>/dev/null
+		rm *.vmdk 2>/dev/null
+		rm *.log 2>/dev/null
+		rm *.nvram 2>/dev/null
+		rm *.vmsd 2>/dev/null
+		rm *.vmx 2>/dev/null
+		rm *.vmxf 2>/dev/null
+		rm *.mf 2>/dev/null
+		rm *.7z 2>/dev/null
+		echo "${orange}Terminado"
+	fi
+        ;;
+   *.rar)
+   echo "${purple}Descomprimiendo rar"
+   unrar e $file > /dev/null
+   rm *.rar
+	if [ -d $nombre*/ ]; then
+	cd $nombre*/
+   		if [ -f *.ova ]; then
+		echo "${yellow}Descomprimiendo ova"
+		tar -xvf *.ova > /dev/null
+			if [ -f *.vmdk ]; then
+			echo "${red}Convirtendo vmdk a qcow2"
+			qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+			echo "${green}Limpiando"
+			rm *.ovf 2>/dev/null
+			rm *.ova 2>/dev/null
+			rm *.vmdk 2>/dev/null
+			rm *.log 2>/dev/null
+			rm *.nvram 2>/dev/null
+			rm *.vmsd 2>/dev/null
+			rm *.vmx 2>/dev/null
+			rm *.vmxf 2>/dev/null
+			rm *.mf 2>/dev/null
+			rm *.rar 2>/dev/null
+			echo "${orange}Terminado"
+			else
+			echo "error"
+			fi
+		else
+		echo "${red}Convirtendo vmdk a qcow2"
+		qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+               	echo "${green}Limpiando"
+		rm *.ovf 2>/dev/null
+		rm *.ova 2>/dev/null
+		rm *.vmdk 2>/dev/null
+		rm *.log 2>/dev/null
+		rm *.nvram 2>/dev/null
+		rm *.vmsd 2>/dev/null
+		rm *.vmx 2>/dev/null
+		rm *.vmxf 2>/dev/null
+		rm *.mf 2>/dev/null
+		rm *.rar 2>/dev/null
+		echo "${orange}Terminado"
+		fi
+	elif [ -f *.ova ]; then
+		echo "${yellow}Descomprimiendo ova"
+		tar -xvf *.ova > /dev/null
+		echo "${red}Convirtendo vmdk a qcow2"
+		qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+		echo "${green}Limpiando"
+		rm *.ovf 2>/dev/null
+		rm *.ova 2>/dev/null
+		rm *.vmdk 2>/dev/null
+		rm *.log 2>/dev/null
+		rm *.nvram 2>/dev/null
+		rm *.vmsd 2>/dev/null
+		rm *.vmx 2>/dev/null
+		rm *.vmxf 2>/dev/null
+		rm *.mf 2>/dev/null
+		rm *.rar 2>/dev/null
+		echo "${orange}Terminado"
+	else
+		echo "${red}Convirtendo vmdk a qcow2"
+                qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+                echo "${green}Limpiando"
+		rm *.ovf 2>/dev/null
+		rm *.ova 2>/dev/null
+		rm *.vmdk 2>/dev/null
+		rm *.log 2>/dev/null
+		rm *.nvram 2>/dev/null
+		rm *.vmsd 2>/dev/null
+		rm *.vmx 2>/dev/null
+		rm *.vmxf 2>/dev/null
+		rm *.mf 2>/dev/null
+		rm *.rar 2>/dev/null
+		echo "${orange}Terminado"
+	fi
+        ;;
+    *.vmdk)
+    echo "${red}Convirtendo vmdk a qcow2"
+    qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+    echo "${green}Limpiando"
+    rm *.ovf 2>/dev/null
+    rm *.ova 2>/dev/null
+    rm *.vmdk 2>/dev/null
+    rm *.log 2>/dev/null
+    rm *.nvram 2>/dev/null
+    rm *.vmsd 2>/dev/null
+    rm *.vmx 2>/dev/null
+    rm *.vmxf 2>/dev/null
+    rm *.mf 2>/dev/null
+    echo "${orange}Terminado"
+        ;;
+   *.gz)
+   echo "${purple}Descomprimiendo gzip"
+   gunzip $file > /dev/null
+	if [ -f *.ova ]; then
+	echo "${yellow}Descomprimiendo ova"
+	tar -xvf *.ova > /dev/null
+		if [ -f *.vmdk ]; then
+		echo "${red}Convirtendo vmdk a qcow2"
+		qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+		echo "${green}Limpiando"
+		rm *.ovf 2>/dev/null
+		rm *.ova 2>/dev/null
+		rm *.vmdk 2>/dev/null
+		rm *.log 2>/dev/null
+		rm *.nvram 2>/dev/null
+		rm *.vmsd 2>/dev/null
+		rm *.vmx 2>/dev/null
+		rm *.vmxf 2>/dev/null
+		rm *.gz 2>/dev/null
+		echo "${orange}Terminado"
+		else
+		echo "error"
+		fi
+	else
+	echo "${red}Convirtendo vmdk a qcow2"
+	qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+        echo "${green}Limpiando"
+	rm *.ovf 2>/dev/null
+	rm *.ova 2>/dev/null
+	rm *.vmdk 2>/dev/null
+	rm *.log 2>/dev/null
+	rm *.nvram 2>/dev/null
+	rm *.vmsd 2>/dev/null
+	rm *.vmx 2>/dev/null
+	rm *.vmxf 2>/dev/null
+	rm *.gz 2>/dev/null
+	echo "${orange}Terminado"
+	fi
+        ;;
+   *.bz2)
+   echo "${purple}Descomprimiendo bzip"
+   bunzip2 $file > /dev/null
+	if [ -f *.ova ]; then
+	echo "${yellow}Descomprimiendo ova"
+	tar -xvf *.ova > /dev/null
+		if [ -f *.vmdk ]; then
+		echo "${red}Convirtendo vmdk a qcow2"
+		qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+		echo "${green}Limpiando"
+		rm *.ovf 2>/dev/null
+		rm *.ova 2>/dev/null
+		rm *.vmdk 2>/dev/null
+		rm *.log 2>/dev/null
+		rm *.nvram 2>/dev/null
+		rm *.vmsd 2>/dev/null
+		rm *.vmx 2>/dev/null
+		rm *.vmxf 2>/dev/null
+		rm *.mf 2>/dev/null
+		rm *.bzip 2>/dev/null
+		echo "${orange}Terminado"
+		else
+		echo "error"
+		fi
+	else
+	echo "${red}Convirtendo vmdk a qcow2"
+	qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+        echo "${green}Limpiando"
+	rm *.ovf 2>/dev/null
+	rm *.ova 2>/dev/null
+	rm *.vmdk 2>/dev/null
+	rm *.log 2>/dev/null
+	rm *.nvram 2>/dev/null
+	rm *.vmsd 2>/dev/null
+  	rm *.vmx 2>/dev/null
+	rm *.vmxf 2>/dev/null
+	rm *.mf 2>/dev/null
+	rm *.bzip 2>/dev/null
+	echo "${orange}Terminado"
+	fi
+        ;;
+   *.tar.gz)
+   echo "${purple}Descomprimiendo tar.gz"
+   tar -xzvf $file > /dev/null
+	if [ -f *.tar ]; then
+	echo "${yellow}Descomprimiendo tar"
+	tar -xvf *.tar > /dev/null
+		if [ -f *.ova ]; then
+		echo "${orange}Descomprimiendo tar"
+		tar -xvf *.tar > /dev/null
+			if [ -f *.vmdk]; then
+			echo "${red}Convirtendo vmdk a qcow2"
+			qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+			echo "${green}Limpiando"
+			rm *.ovf 2>/dev/null
+			rm *.ova 2>/dev/null
+			rm *.vmdk 2>/dev/null
+			rm *.log 2>/dev/null
+			rm *.nvram 2>/dev/null
+			rm *.vmsd 2>/dev/null
+			rm *.vmx 2>/dev/null
+			rm *.vmxf 2>/dev/null
+			rm *.mf 2>/dev/null
+			rm *.tar.gz 2>/dev/null
+			echo "${orange}Terminado"
+			else
+			echo "error"
+			fi
+		else
+		echo"error"
+		fi
+	elif [ -f *.ova ]; then
+		echo "${yellow}Descomprimiendo ova"
+		tar -xvf *.ova > /dev/null
+		echo "${red}Convirtendo vmdk a qcow2"
+		qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+		echo "${green}Limpiando"
+		rm *.ovf 2>/dev/null
+		rm *.ova 2>/dev/null
+		rm *.vmdk 2>/dev/null
+		rm *.log 2>/dev/null
+		rm *.nvram 2>/dev/null
+		rm *.vmsd 2>/dev/null
+		rm *.vmx 2>/dev/null
+		rm *.vmxf 2>/dev/null
+		rm *.mf 2>/dev/null
+		rm *.tar.gz 2>/dev/null
+		echo "${orange}Terminado"
+	else
+		echo "${red}Convirtendo vmdk a qcow2"
+                qemu-img convert -f vmdk *.vmdk $nombre.qcow2 -O qcow2
+                echo "${green}Limpiando"
+		rm *.ovf 2>/dev/null
+		rm *.ova 2>/dev/null
+		rm *.vmdk 2>/dev/null
+		rm *.log 2>/dev/null
+		rm *.nvram 2>/dev/null
+		rm *.vmsd 2>/dev/null
+		rm *.vmx 2>/dev/null
+		rm *.vmxf 2>/dev/null
+		rm *.mf 2>/dev/null
+		rm *.tar.gz 2>/dev/null
+		echo "${orange}Terminado"
+	fi
+        ;;
+  *)
+	echo "Error con el archivo"
+	;;
+esac
+done
